@@ -53,16 +53,18 @@ export default class AgentforceInput extends LightningElement {
         }
 
         this.isUploading = true;
+        
+        console.log('Starting file upload. Selected files:', this.selectedFiles);
 
         try {
-            const files = await Promise.all(
+            const files = 
                 this.selectedFiles.map(async (file) => ({
                     fileName: file.name,
                     base64Data: await this.readFileAsBase64(file),
                     mimeType: file.type
                 }))
-            );
 
+            console.log('Files prepared for upload:', files);
             const contentVersionIds = await uploadFiles({
                 files,
                 recordId: this.recordId || null
@@ -70,8 +72,13 @@ export default class AgentforceInput extends LightningElement {
 
             this.contentVersionIds = contentVersionIds;
             this.selectedFiles = [];
+            console.log('Files uploaded successfully. ContentVersionIds:', contentVersionIds);
             this.notifyValueChange();
-        } finally {
+        } catch (error) {
+            console.log('Error uploading files:', error);
+            // Optionally, you could dispatch an event here to notify the user of the error
+        } 
+        finally {
             this.isUploading = false;
         }
     }

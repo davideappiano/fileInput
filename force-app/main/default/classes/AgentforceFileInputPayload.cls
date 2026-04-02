@@ -1,4 +1,3 @@
-@JsonAccess(serializable='always', deserializable='always')
 global class AgentforceFileInputPayload {
     @AuraEnabled
     @InvocableVariable(

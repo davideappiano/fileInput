@@ -7,6 +7,7 @@ public with sharing class AgentforceFileInputController {
 
     @AuraEnabled
     public static List<Id> uploadFiles(List<FileUploadRequest> files, Id recordId) {
+        
         if (files == null || files.isEmpty()) {
             throw new AuraHandledException('Select at least one file to upload.');
         }
@@ -14,6 +15,9 @@ public with sharing class AgentforceFileInputController {
         List<ContentVersion> versionsToInsert = new List<ContentVersion>();
 
         for (FileUploadRequest file : files) {
+            System.debug('*** Processing file: ' + file.fileName);
+            System.debug('*** Base64 data length: ' + (file.base64Data != null ? file.base64Data.length() : 0));
+
             if (file == null || String.isBlank(file.fileName) || String.isBlank(file.base64Data)) {
                 throw new AuraHandledException('Each uploaded file must include a name and body.');
             }

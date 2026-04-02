@@ -1,5 +1,4 @@
 global with sharing class AgentforceFileAnalysisAction {
-    @JsonAccess(serializable='always', deserializable='always')
     global class Request {
         @AuraEnabled
         @InvocableVariable(
@@ -10,7 +9,6 @@ global with sharing class AgentforceFileAnalysisAction {
         global AgentforceFileInputPayload fileInput;
     }
 
-    @JsonAccess(serializable='always', deserializable='always')
     global class Response {
         @AuraEnabled
         @InvocableVariable(

@@ -1,7 +1,9 @@
 {
-  "componentOverrides": {
-    "$": {
-      "definition": "c/agentforceInput"
+  "editor": {
+    "componentOverrides": {
+      "$": {
+        "definition": "c/agentforceInput"
+      }
     }
   }
 }
