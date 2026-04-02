@@ -1,0 +1,5 @@
+{
+  "title": "File Input",
+  "description": "Structured Agentforce input for uploaded file ContentVersion IDs.",
+  "lightning:type": "@apexClassType/c__AgentforceFileInputPayload"
+}

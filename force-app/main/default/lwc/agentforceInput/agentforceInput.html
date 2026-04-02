@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Agentforce File Input">
+        <div class="slds-p-around_medium">
+            <lightning-input
+                type="file"
+                label="Select files"
+                multiple
+                onchange={handleInputChange}
+            ></lightning-input>
+
+            <template lwc:if={hasSelectedFiles}>
+                <p class="slds-m-top_small slds-text-title_caps">Selected files</p>
+                <ul class="slds-list_dotted slds-m-top_x-small slds-m-left_medium">
+                    <template for:each={selectedFileNames} for:item="fileName">
+                        <li key={fileName}>{fileName}</li>
+                    </template>
+                </ul>
+            </template>
+
+            <div class="slds-m-top_medium">
+                <lightning-button
+                    label="Upload Files"
+                    variant="brand"
+                    onclick={handleUpload}
+                    disabled={isUploadDisabled}
+                ></lightning-button>
+            </div>
+
+            <template lwc:if={hasContentVersionIds}>
+                <p class="slds-m-top_medium slds-text-title_caps">ContentVersion IDs</p>
+                <ul class="slds-list_dotted slds-m-top_x-small slds-m-left_medium">
+                    <template for:each={contentVersionIds} for:item="versionId">
+                        <li key={versionId}>{versionId}</li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+    </lightning-card>
+</template>

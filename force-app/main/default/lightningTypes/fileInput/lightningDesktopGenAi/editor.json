@@ -1,0 +1,7 @@
+{
+  "componentOverrides": {
+    "$": {
+      "definition": "c/agentforceInput"
+    }
+  }
+}
