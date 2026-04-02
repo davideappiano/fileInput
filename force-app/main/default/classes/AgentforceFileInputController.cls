@@ -1,8 +1,8 @@
 public with sharing class AgentforceFileInputController {
     public class FileUploadRequest {
-        @AuraEnabled public String fileName;
-        @AuraEnabled public String base64Data;
-        @AuraEnabled public String mimeType;
+        @AuraEnabled public String fileName { get; set; }
+        @AuraEnabled public String base64Data { get; set; }
+        @AuraEnabled public String mimeType { get; set; }
     }
 
     @AuraEnabled

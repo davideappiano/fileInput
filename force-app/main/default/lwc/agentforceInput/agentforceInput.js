@@ -53,18 +53,24 @@ export default class AgentforceInput extends LightningElement {
         }
 
         this.isUploading = true;
-        
+
         console.log('Starting file upload. Selected files:', this.selectedFiles);
 
+        console.log('**** ì');
+        console.log(this.selectedFiles[0].name);
         try {
-            const files = 
-                this.selectedFiles.map(async (file) => ({
+            const files = [];
+            for (const file of this.selectedFiles) {
+                console.log(`Preparing file for upload: ${file.name}, type: ${file.type}, size: ${file.size} bytes`);
+                const base64Data = await this.readFileAsBase64(file);
+                files.push({
                     fileName: file.name,
-                    base64Data: await this.readFileAsBase64(file),
+                    base64Data,
                     mimeType: file.type
-                }))
+                });
+            }
 
-            console.log('Files prepared for upload:', files);
+            console.log('Files prepared for upload:', JSON.stringify(files[0]));
             const contentVersionIds = await uploadFiles({
                 files,
                 recordId: this.recordId || null
@@ -77,7 +83,7 @@ export default class AgentforceInput extends LightningElement {
         } catch (error) {
             console.log('Error uploading files:', error);
             // Optionally, you could dispatch an event here to notify the user of the error
-        } 
+        }
         finally {
             this.isUploading = false;
         }
@@ -92,9 +98,7 @@ export default class AgentforceInput extends LightningElement {
 
         this.dispatchEvent(
             new CustomEvent('valuechange', {
-                detail: { value },
-                bubbles: true,
-                composed: true
+                detail: { value }
             })
         );
     }
