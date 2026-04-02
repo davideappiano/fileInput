@@ -34,6 +34,13 @@ global with sharing class AgentforceFileAnalysisAction {
                 ? request.fileInput.contentVersionIds
                 : null;
 
+            // multiples IDS
+            List<String> ids = contentVersionIds != null ? 
+                contentVersionIds.split(',') : 
+                new List<String>();
+
+            // TODO: RObert SAFA => Implem ici l'analyse des fichiers à partir des ContentVersion IDs
+
             Response response = new Response();
             response.analysis = 'Files analyzed';
             responses.add(response);
